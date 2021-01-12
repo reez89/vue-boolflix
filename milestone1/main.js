@@ -20,13 +20,7 @@ let app = new Vue({
     
     methods: {
         searchMovie: function (search){
-            var modello= {
-            method: 'get',
-            url: `https://api.themoviedb.org/3/search/movie?api_key=63c44cc4459f95138303a72049a37548&language=it&query=${search}&include_adult=false`,
-            headers: {}
-            };
-            
-            axios(modello).then(resp=>{
+            axios.get(`https://api.themoviedb.org/3/search/movie?api_key=63c44cc4459f95138303a72049a37548&language=it&query=${search}&include_adult=false`).then(resp=>{
                 this.filmsDb = resp.data.results;
             })
 
@@ -34,5 +28,7 @@ let app = new Vue({
         }
     }
 })
+
+
 
 
