@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font awsome -->
+    <script src="https://kit.fontawesome.com/fc3e9057b4.js" crossorigin="anonymous"></script>
     <!-- Axios -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
     <!-- VueJs -->
@@ -11,15 +13,18 @@
 </head>
 <body>
     <div id="app">
-        <input type="search" v-model="txt" placeholder="Find your movie" >
-        <button @click="searchMovie(txt)">Find your movie</button>
+        <input type="search" v-model="txt" placeholder="Find your movie" @keydown.enter="searchMovie(txt)">
+        <button @click="searchMovie(txt)" @keyup.enter="searchMovie()">Find your movie</button>
         
         <div v-if="filmsDb">
             <div v-for="film in filmsDb">
                 <p>{{film.title}}</p>
                 <p>{{film.original_title}}</p>
                 <p>{{film.orginal_lenguage}}</p>
-                <p>{{film.vote_average}}</p>
+                <p>
+                    <i v-for="star in filmsDb.stars" class="fas fa-star"></i>
+                    <i v-for="star in (5 - filmsDb.stars)"class="far fa-star"></i>
+                </p>
             </div>
         </div>
     </div>
