@@ -21,8 +21,7 @@
                 <p>{{film.title}}</p>
                 <p v-if="film.original_title">{{film.original_title}}</p>
                 <p v-else>{{film.original_name}}</p>
-                <p>{{film.orginal_lenguage}}</p>
-                <p>{{film.original_language}}</p>
+                <span>{{film.flag}}</span>
                 <p>
                     <i v-for="n in film.stars" class="fas fa-star"></i>
                     <i v-for="n in (5- film.stars)" class="far fa-star"></i>
