@@ -18,8 +18,7 @@ let app = new Vue({
     el: "#app",
     data:{
         txt:'',
-        filmsDb:[
-        ],
+        filmsDb:[],
     },
 
     mounted() {

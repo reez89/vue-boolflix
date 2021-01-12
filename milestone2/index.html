@@ -22,8 +22,8 @@
                 <p>{{film.original_title}}</p>
                 <p>{{film.orginal_lenguage}}</p>
                 <p>
-                    <i v-for="star in filmsDb.stars" class="fas fa-star"></i>
-                    <i v-for="star in (5 - filmsDb.stars)"class="far fa-star"></i>
+                    <i v-for="n in film.stars" class="fas fa-star"></i>
+                    <i v-for="n in (5- film.stars)" class="far fa-star"></i>
                 </p>
             </div>
         </div>
