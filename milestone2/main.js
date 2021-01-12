@@ -29,20 +29,27 @@ let app = new Vue({
         searchMovie: function (search){
             
             axios.get(`https://api.themoviedb.org/3/search/movie?api_key=63c44cc4459f95138303a72049a37548&language=it&query=${search}&include_adult=false`).then(resp=>{
-                this.filmsDb = resp.data.results;
+               let film = resp.data.results
+               
+            axios.get(`https://api.themoviedb.org/3/search/tv?api_key=63c44cc4459f95138303a72049a37548&language=it&query=${search}&include_adult=false`).then(resp=>{
+                let series = resp.data.results
+
+                //Aggiungo entrambe le richieste al mio database generale.
+                this.filmsDb = film.concat(series) 
+
+
 
                 // tramite il forEach accedo alla proprietà che mi interessa per modificarla.
                 this.filmsDb.forEach(element => {
                   return element.stars = Math.floor(element.vote_average / 2)
-
                 });
-
+                
             })
+        })
             
-
             this.txt= '';
-            
-        }
+        },
+       
     }
 })
 
