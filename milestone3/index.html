@@ -23,28 +23,26 @@
             </header>
         </div>
             
-        <main>
-            <div >
-                <div v-if="filmsDb" class="film-container ">
-                    <div v-for="film in filmsDb" class="flex">
-                        <div class="hover-cover">
-                            <div class="img-box">
-                                <img :src="film.img" alt="">
-                            </div>
-                            <div class="film-info">
-                                <p>{{film.title}}</p>
-                                <p v-if="film.original_title">{{film.original_title}}</p>
-                                <p v-else>{{film.original_name}}</p>
-                                <img :src="film.flag">
-                                <p>
-                                    <i v-for="n in film.stars" class="fas fa-star"></i>
-                                    <i v-for="n in (5- film.stars)" class="far fa-star"></i>
-                                </p>
-                            </div> 
+        <main id="main-content" >
+            <div v-if="filmsDb" class="film-container ">
+                <div v-for="film in filmsDb" class="flex mx">
+                    <div class="hover-cover">
+                        <div class="img-box">
+                            <img :src="film.img" alt="">
                         </div>
+                        <div class="film-info">
+                            <p>Titolo: {{film.title}}</p>
+                            <p v-if="film.original_title">Titolo: {{film.original_title}}</p>
+                            <p v-else>Titolo originale: {{film.original_name}}</p>
+                            <img :src="film.flag">
+                            <p> Voto: 
+                                <i v-for="n in film.stars" class="fas fa-star"></i>
+                                <i v-for="n in (5- film.stars)" class="far fa-star"></i>
+                            </p>
+                        </div> 
                     </div>
-                </div>    
-            </div>
+                </div>
+            </div>    
         </main>
     </div>
 
