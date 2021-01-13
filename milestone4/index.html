@@ -7,6 +7,9 @@
     <script src="https://kit.fontawesome.com/fc3e9057b4.js" crossorigin="anonymous"></script>
     <!-- Style css -->
     <link rel="stylesheet" href="./style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;900&display=swap" rel="stylesheet">    
     <!-- Axios -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
     <!-- VueJs -->
@@ -25,25 +28,27 @@
             
         <main id="main-content" >
             <div v-if="filmsDb" class="film-container ">
-                <div v-for="film in filmsDb" class="flex mx">
-                    <div class="hover-cover">
+                <div v-for="film in filmsDb" class="flex mx movie">
+                    
                         <div class="img-box">
                             <img :src="film.img" alt="">
                         </div>
                         <div class="film-info">
-                            <p>Titolo: {{film.title}}</p>
-                            <p v-if="film.original_title">Titolo: {{film.original_title}}</p>
-                            <p v-else>Titolo originale: {{film.original_name}}</p>
+                            <p class="white"><strong>Titolo:</strong> {{film.title}}</p>
+                            <p class="white" v-if="film.original_title"> <strong>Titolo originale:</strong> {{film.original_title}}</p>
+                            <p class="white" v-else><strong>Titolo serie:</strong> {{film.original_name}}</p>
                             <img :src="film.flag">
-                            <p> Voto: 
+                            <p class="white" >{{film.overview}}</p>
+                            <p> <strong class="white" >Voto: </strong> 
                                 <i v-for="n in film.stars" class="fas fa-star"></i>
                                 <i v-for="n in (5- film.stars)" class="far fa-star"></i>
                             </p>
                         </div> 
-                    </div>
+                    
                 </div>
             </div>    
         </main>
+
     </div>
 
 
