@@ -63,7 +63,7 @@ header {
 }
 
 .movie:hover .img-box {
-    opacity: 0.2;
+    opacity: 0.1;
 }
 
 .movie:hover .film-info {
@@ -71,12 +71,10 @@ header {
 }
 
 .img-box {
-    height: 500px;
     width: 300px;
-}
-
-.img-box:hover {
-    background-color: black;
+    height: 500px;
+    border: 2px solid white;
+    cursor: pointer;
 }
 
 .img-box img {
@@ -84,23 +82,32 @@ header {
     height: 100%;
 }
 
-.img-box:hover .hover-cover {
-    background: #110e0dcf;
-    cursor: pointer;
-}
-
 .film-info {
     visibility: hidden;
     position: absolute;
     height: auto;
-    top: 20px;
+    top: 40px;
+    height: 150px;
+    padding: 0 10px;
 }
 
-.img-box {
-    border: 2px solid white;
-    width: 100%;
+.film-info>.overview {
+    font-size: 12px;
 }
 
 .film-info i {
     color: yellow;
+}
+
+.film-info p {
+    margin: 0.2rem 0;
+}
+
+.flag {
+    align-items: center;
+}
+
+.flag p {
+    color: white;
+    margin-right: 0.2rem;
 }

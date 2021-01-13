@@ -27,21 +27,21 @@
         </div>
             
         <main id="main-content" >
-            <div v-if="filmsDb" class="film-container ">
+            <div v-if="filmsDb" class="film-container container">
                 <div v-for="film in filmsDb" class="flex mx movie">
-                    
                         <div class="img-box">
                             <img :src="film.img" alt="">
                         </div>
                         <div class="film-info">
                             <p class="white"><strong>Titolo:</strong> {{film.title}}</p>
-                            <p class="white" v-if="film.original_title"> <strong>Titolo originale:</strong> {{film.original_title}}</p>
+                            <p class="white " v-if="film.original_title"> <strong>Titolo originale:</strong> {{film.original_title}}</p>
                             <p class="white" v-else><strong>Titolo serie:</strong> {{film.original_name}}</p>
-                            <img :src="film.flag">
-                            <p class="white" >{{film.overview}}</p>
+                            <div class="flag flex">
+                                <p> Lingua:</p><img :src="film.flag">
+                            </div>
+                            <p class="white overview" >{{film.overview}}</p>
                             <p> <strong class="white" >Voto: </strong> 
-                                <i v-for="n in film.stars" class="fas fa-star"></i>
-                                <i v-for="n in (5- film.stars)" class="far fa-star"></i>
+                                <i v-for="n in film.stars" class="fas fa-star"></i><i v-for="n in (5- film.stars)" class="far fa-star"></i>
                             </p>
                         </div> 
                     

@@ -62,7 +62,11 @@ let app = new Vue({
                 })
 
                 this.filmsDb.forEach(element=>{
-                    return element.img = `https://image.tmdb.org/t/p/w342${element.poster_path}`
+                    if(element.poster_path === null){
+                        element.img = `img/no-image-800x80011.jpg`
+                    } else {
+                        return element.img = `https://image.tmdb.org/t/p/w342${element.poster_path}`
+                    }
                 })
                 
             })
