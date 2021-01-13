@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Font awsome -->
     <script src="https://kit.fontawesome.com/fc3e9057b4.js" crossorigin="anonymous"></script>
+    <!-- Style css -->
+    <link rel="stylesheet" href="./style.css">
     <!-- Axios -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
     <!-- VueJs -->
@@ -13,22 +15,37 @@
 </head>
 <body>
     <div id="app">
-        <input type="search" v-model="txt" placeholder="Find your movie" @keydown.enter="searchMovie(txt)">
-        <button @click="searchMovie(txt)">Find your movie</button>
-        
-        <div v-if="filmsDb">
-            <div v-for="film in filmsDb">
-                <img :src="film.img" alt="">
-                <p>{{film.title}}</p>
-                <p v-if="film.original_title">{{film.original_title}}</p>
-                <p v-else>{{film.original_name}}</p>
-                <img :src="film.flag">
-                <p>
-                    <i v-for="n in film.stars" class="fas fa-star"></i>
-                    <i v-for="n in (5- film.stars)" class="far fa-star"></i>
-                </p>
-            </div>
+
+        <div class="navbar">
+            <header class="container">
+                <img src="../milestone4/img/boolflix.png" alt="">
+                <input type="search" v-model="txt" placeholder="Find your movie" @keydown.enter="searchMovie(txt)">
+            </header>
         </div>
+            
+        <main>
+            <div class="film-container container ">
+                <div v-if="filmsDb">
+                    <div class="film-container" v-for="film in filmsDb">
+                        <div class="hover-cover">
+                            <div class="img-box">
+                                <img :src="film.img" alt="">
+                            </div>
+                            <div class="film-info">
+                                <p>{{film.title}}</p>
+                                <p v-if="film.original_title">{{film.original_title}}</p>
+                                <p v-else>{{film.original_name}}</p>
+                                <img :src="film.flag">
+                                <p>
+                                    <i v-for="n in film.stars" class="fas fa-star"></i>
+                                    <i v-for="n in (5- film.stars)" class="far fa-star"></i>
+                                </p>
+                            </div> 
+                        </div>
+                    </div>
+                </div>    
+            </div>
+        </main>
     </div>
 
 
