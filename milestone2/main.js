@@ -45,7 +45,7 @@ let app = new Vue({
                 });
 
                 this.filmsDb.forEach(element=>{
-                    return element.flag = `https://www.countryflags.io/${element.original_language}/flat/64.png`;
+                    return element.flag = `<img src="https://www.countryflags.io/${element.original_language}/flat/64.png">`;
                 })
                 
             })
