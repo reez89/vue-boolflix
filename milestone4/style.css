@@ -6,6 +6,7 @@
 
 body {
     background: gray;
+    overflow: hidden;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -42,7 +43,7 @@ header {
 
 #main-content {
     display: flex;
-    min-height: 100vh;
+    height: 100vh;
     overflow-y: scroll;
     align-items: center;
     justify-content: center;
@@ -50,6 +51,7 @@ header {
 }
 
 .film-container {
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -64,10 +66,12 @@ header {
 
 .movie:hover .img-box {
     opacity: 0.1;
+    transition: all .5s ease-in-out;
 }
 
 .movie:hover .film-info {
-    visibility: visible;
+    transition: all .4s ease-in-out;
+    opacity: 1;
 }
 
 .img-box {
@@ -75,6 +79,7 @@ header {
     height: 500px;
     border: 2px solid white;
     cursor: pointer;
+    transition: all .4s ease-in-out
 }
 
 .img-box img {
@@ -83,12 +88,18 @@ header {
 }
 
 .film-info {
-    visibility: hidden;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    opacity: 0;
+    background-color: rgba(0, 0, 0, .2);
     position: absolute;
     height: auto;
-    top: 40px;
-    height: 150px;
+    width: 100%;
+    height: 100%;
     padding: 0 10px;
+    transition: all .5s ease-in-out;
+    cursor: pointer;
 }
 
 .film-info>.overview {
@@ -110,4 +121,9 @@ header {
 .flag p {
     color: white;
     margin-right: 0.2rem;
+}
+
+footer {
+    height: 150px;
+    background-color: yellow;
 }

@@ -21,7 +21,9 @@
 
         <div class="navbar">
             <header class="container">
-                <img src="../milestone4/img/boolflix.png" alt="">
+                <a href="" @click="refresh()">
+                    <img src="../milestone4/img/boolflix.png" alt="">
+                </a>
                 <input type="search" v-model="txt" placeholder="Find your movie" @keydown.enter="searchMovie(txt)">
             </header>
         </div>

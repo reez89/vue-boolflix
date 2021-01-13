@@ -75,6 +75,10 @@ let app = new Vue({
             this.txt= '';
         },
        
+
+        refresh(){
+            this.$forceUpdate()
+        }
     }
 })
 
