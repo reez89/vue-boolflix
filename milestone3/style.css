@@ -4,8 +4,16 @@
     box-sizing: border-box;
 }
 
+body {
+    background: gray;
+}
+
 .container {
     width: 80%;
+}
+
+.flex {
+    display: flex;
 }
 
 .navbar {
@@ -25,33 +33,39 @@ header {
 
 main {
     display: flex;
+    height: 100vh;
+    overflow-y: scroll;
+    margin-top: 40px;
     align-items: center;
     justify-content: center;
-    background: gray;
+
 }
 
 .film-container {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
 }
 
 .hover-cover {
     position: relative;
     width: auto;
     height: 100%;
-    background: black;
+    background: green;
 }
 
-.hover-cover {
+.img-box:hover .hover-cover {
     background: rgba(black, black, black, 0.2);
 }
 
 .film-info {
     position: absolute;
+    top: 20px;
     z-index: 10;
 }
 
-.film-container img {
+.img-box {
     border: 2px solid white;
+    width: 100%;
 }

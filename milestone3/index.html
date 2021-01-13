@@ -24,9 +24,9 @@
         </div>
             
         <main>
-            <div class="film-container container ">
-                <div v-if="filmsDb">
-                    <div class="film-container" v-for="film in filmsDb">
+            <div >
+                <div v-if="filmsDb" class="film-container ">
+                    <div v-for="film in filmsDb" class="flex">
                         <div class="hover-cover">
                             <div class="img-box">
                                 <img :src="film.img" alt="">
