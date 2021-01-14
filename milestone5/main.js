@@ -16,16 +16,21 @@ let app = new Vue({
     },
 
     mounted() {
-        
+      
     },
     
     methods: {
         searchMovie: function (search){
             
-            axios.get(`https://api.themoviedb.org/3/search/movie?api_key=63c44cc4459f95138303a72049a37548&language=it&query=${search}&include_adult=false`).then(resp=>{
+            axios
+            .get(`https://api.themoviedb.org/3/search/movie?api_key=63c44cc4459f95138303a72049a37548&language=it&query=${search}&include_adult=false`)
+            .then(resp=>{
                let film = resp.data.results
                
-            axios.get(`https://api.themoviedb.org/3/search/tv?api_key=63c44cc4459f95138303a72049a37548&language=it&query=${search}&include_adult=false`).then(resp=>{
+            axios
+            .get(`https://api.themoviedb.org/3/search/tv?api_key=63c44cc4459f95138303a72049a37548&language=it&query=${search}&include_adult=false`)
+            .then(resp=>{
+
                 let series = resp.data.results
 
 
@@ -72,13 +77,15 @@ let app = new Vue({
 
                 // per poter aggiungere ad ogni elemento, la proprietà cast, uso un forEach.
                 this.filmsDb.forEach(movie=> this.sumCast(movie))
+                // per poter aggiungere ad ogni elemento, la proprietà genre_names, uso un forEach.
+                this.filmsDb.forEach(genres=>this.sumGenres(genres))
             })
 
         })
             this.txt= '';
         },
 
-       // Creo una funzione che mi permette di reperire l'id del mio video. Visto che a volte gli id hanno meno di 5 cifre, devo utilizzare 2 cicli differenti per poter prendere ogni risultato.
+       // Creo una funzione che mi permette di reperire l'id del mio video. Visto che a volte i cast sono composti da piu' di 5 persone, uso un ciclo for per ciclarne solo 5.
 
         getMovieCast: function(movie_id){
             let movieCast = [];
@@ -126,11 +133,32 @@ let app = new Vue({
                 return tvCast;
         },
 
-        getGenres: function(){
-            let genres = [];
+        getGenres: function(movie_id){
+            let genresDb = [];
             axios
-                .get('https://api.themoviedb.org/3/genre/movie/list?api_key=63c44cc4459f95138303a72049a37548')
-                .then
+                .get(`https://api.themoviedb.org/3/movie/${movie_id}?api_key=63c44cc4459f95138303a72049a37548`)
+                .then(resp=>{
+                    let genres = resp.data.genres;
+                    if(genres){
+                        console.log(genres);
+                        genres.forEach(genre => genresDb.push(genre.name))
+                        
+                    }
+                })
+            return genresDb;
+        },
+
+        getTvNames: function(tv_id){
+            let genresTvDb = [];
+            axios
+                .get(`https://api.themoviedb.org/3/tv/${tv_id}/credits?api_key=63c44cc4459f95138303a72049a37548`)
+                .then(resp=>{
+                    let genres = resp.data.genres;
+                    if(genres){
+                        genres.forEach(genre => genresTvDb.push(genre.name) )
+                    }
+                })
+                return genresTvDb;
         },
 
         // Con questa funzione, inserisco, tramite il metodo Vue.set, una nuova proprità all'interno della mia istanza vue, che successivamente, nella fuzione search in alto, aggiungerò all'interno del mio filmsDB.
@@ -142,6 +170,13 @@ let app = new Vue({
                 Vue.set(movie, "cast", this.getMovieCast(movie.id));
             }
         },
+        sumGenres(generi){
+            if(generi.hasOwnProperty("original_title")){
+                Vue.set(generi, "genre_names",this.getGenres(generi.id))
+            }else if(generi.hasOwnProperty("original_name")) {
+                Vue.set(generi, "genre_names", this.getTvNames(generi.id))
+            }
+        }
 
         
     }

@@ -25,7 +25,7 @@
                 <a href="" @click="refresh()">
                     <img src="../milestone4/img/boolflix.png" alt="">
                 </a>
-                <input type="search" v-model="txt" placeholder="Find your movie" @keydown.enter="searchMovie(txt)">
+                <input type="search" v-model="txt" placeholder="Find your movies or series" @keydown.enter="searchMovie(txt)">
             </header>
         </div>
             
@@ -47,6 +47,7 @@
                                 <i v-for="n in film.stars" class="fas fa-star"></i><i v-for="n in (5- film.stars)" class="far fa-star"></i>
                             </p>
                             <p class="white">Cast : {{film.cast}}</p>
+                            <p class="white">Genere : {{film.genre_names}}</p>
                         </div> 
                 </div>
             </div>    
