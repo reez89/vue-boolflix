@@ -12,7 +12,7 @@ let app = new Vue({
     },
 
     mounted() {
-
+        this.getCast();
     },
     
     methods: {
@@ -23,6 +23,7 @@ let app = new Vue({
                
             axios.get(`https://api.themoviedb.org/3/search/tv?api_key=63c44cc4459f95138303a72049a37548&language=it&query=${search}&include_adult=false`).then(resp=>{
                 let series = resp.data.results
+
 
                 //Aggiungo entrambe le richieste al mio database generale.
                 this.filmsDb = film.concat(series) 
@@ -64,13 +65,48 @@ let app = new Vue({
                         return element.img = `https://image.tmdb.org/t/p/w342${element.poster_path}`
                     }
                 })
+
+                // per poter aggiungere ad ogni elemento, la proprietà cast, uso un forEach.
+                this.filmsDb.forEach(movie=> this.sumCast(movie))
                 
             })
+
         })
-            
             this.txt= '';
         },
-       
+
+       // Creo una funzione che mi permette di reperire l'id del mio video. Visto che a volte gli id hanno meno di 5 cifre, devo utilizzare 2 cicli differenti per poter prendere ogni risultato.
+
+        getCast: function(movie_id){
+            let movieCast = [];
+            axios
+                .get(`https://api.themoviedb.org/3/movie/${movie_id}/credits?api_key=63c44cc4459f95138303a72049a37548`)
+                .then(resp=>{
+                    let cast = resp.data.cast;
+                    if(cast.length>=5){
+                        for (let i=0; i<5; i++) {
+                            console.log(cast[i].name);
+                            movieCast.push(cast[i].name)
+                        } 
+                    }else if (cast.length < 5) {
+                        for (let i = 0; i < cast.length; i++) {
+                            movieCast.push(cast[i].name);
+                        }
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+                return movieCast;
+        },
+
+        // Con questa funzione, inserisco, tramite il metodo Vue.set, una nuova proprità all'interno della mia istanza vue, che successivamente, nella fuzione search in alto, aggiungerò all'interno del mio filmsDB.
+
+        sumCast(movie) {
+            if (movie.hasOwnProperty("original_title")) {
+                return Vue.set(movie, "cast", this.getCast(movie.id));
+            }
+        },
 
         refresh(){
             this.$forceUpdate()

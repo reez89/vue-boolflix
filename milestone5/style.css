@@ -43,7 +43,7 @@ header {
 
 #main-content {
     display: flex;
-    height: 100vh;
+    height: calc(100vh - 150px);
     overflow-y: scroll;
     align-items: center;
     justify-content: center;
