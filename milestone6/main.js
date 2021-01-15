@@ -84,6 +84,16 @@ let app = new Vue({
                 // per poter aggiungere ad ogni elemento, la proprietà genre_names, uso un forEach.
                 this.filmsDb.forEach(genres=>this.sumGenres(genres))
 
+                // this.filmsDb.forEach(el=>{  
+                //     let arrGeneri = el.genre_names;
+                //     console.log(arrGeneri);
+                //     if(arrGeneri){
+                //         for( let i=0; i<arrGeneri.length; i++){
+                //             this.generi.push(arrGeneri[i])
+                //             console.log(this.generi);
+                //         }
+                //     }
+                // })
             })
 
         })
@@ -139,7 +149,20 @@ let app = new Vue({
         },
         
         /* XXX FINITE LE FUNZIONI CHE MI RITORNANO 5 RISULTATI */
-  
+        
+        selectGenre(){
+            this.filmsDb.forEach(el=>{  
+                    let arrGeneri = el.genre_names;
+                    console.log(arrGeneri);
+                    if(arrGeneri){
+                        for( let i=0; i<arrGeneri.length; i++){
+                            this.generi.push(arrGeneri[i])
+                            console.log(this.generi);
+                        }
+                    }
+                })
+        },
+        
         /* ORA CREO DELLE FUNZIONI PER I GENERI */
 
         getGenres: function(movie_id){
